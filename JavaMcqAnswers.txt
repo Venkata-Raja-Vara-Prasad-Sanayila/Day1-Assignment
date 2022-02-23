@@ -1,0 +1,271 @@
+Answer the below question :
+
+1. Can you create a sub class to the following class?
+Ans: No we cannot create. Because in the below code the constructor methods are private.
+class A
+{
+    private A()
+    {
+        //First Constructor
+    }
+     
+    private A(int i)
+    {
+        //Second Constructor
+    }
+}
+
+2. Does field ‘i’ of Class A be inherited to Class B in the below code?
+Ans: Yes, Because the protected access modifier is accessible within the package and it can also be accessible outside the package but through inheritance only.
+
+class A
+{
+    protected int i;
+}
+ 
+class B extends A
+{
+     
+}
+
+3. Is the below code written correctly?
+Ans : No below code is incorrect. Private members or inner private class we cannot inherit.
+
+class A
+{
+    private class B
+    {
+        //inner class
+    }
+}
+ 
+public class MainClass extends A
+{
+    public static void main(String[] args)
+    {
+        B b = new B();
+    }
+}
+
+4. Is the below code written correctly?
+Ans: No the below code is incorrect. The Class with default access modifiers can not have subclass outside the package.
+
+package pack1;
+ 
+class A
+{
+     
+}
+ 
+package pack2;
+ 
+class B extends A
+{
+     
+}
+
+5. Can we declare a class as protected?
+Ans : No, we cannot declare an outer class as protected. But we can declare inner class as protected.
+Ex: 
+class A
+{
+	 int j=100;
+	protected class B{
+		private int i=10;
+	}
+	void display() {
+		B b=new B();
+		System.out.print(b.i);
+	}
+}
+public class QueSubClass extends A{
+
+	public static void main(String[] args) {
+		QueSubClass a= new QueSubClass();
+		//QueSubClass.B b= a.new B();
+            a.display();
+		
+	}
+
+}
+6. Do you think the below program is written correctly? If yes, what will be the output?
+Ans : 1221
+      1221
+
+package pack1;
+ 
+class X
+{
+    protected int i = 1221;
+     
+    void methodOfX()
+    {
+        System.out.println(i);
+    }
+}
+ 
+public class MainClass
+{
+    public static void main(String[] args)
+    {
+        X x = new X();
+         
+        System.out.println(x.i);
+         
+        x.methodOfX();
+    }
+}
+
+7. Is the below programme works ? If not what will be the reason ?
+Ans : No, the Class with default access modifier cannot be instantiated outside the package, even if it has public constructor.
+
+package pack1;
+ 
+class A
+{
+    public A()
+    {
+        //public constructor
+    }
+}
+ 
+package pack2;
+ 
+import pack1.*;
+ 
+class B
+{
+    A a = new A();       //Compile Time Error
+}
+
+8. Can a protected field of a class be inherited to subclass outside the package?
+Ans : Yes, the protected field of a class be inherited to subclass outside the package.
+9.Why Line 17 in the below code is throwing compile time error?
+Ans : The constructor A() is not visible as it is having protected access modifier.we cannot instantiate a class outside the package.
+
+package pack1;
+ 
+public class A
+{
+    protected A()
+    {
+        //protected constructor
+    }
+}
+ 
+package pack2;
+ 
+import pack1.A;
+ 
+class B
+{
+    A a = new A();
+}
+
+10. Can we declare static methods as private?
+Ans : Yes, we can declare static methods as private.
+
+public class QueSubClass 
+
+{
+	static int i = 1221;
+    
+    private static void methodOfX()
+    {
+        i=143;
+    }
+    static {
+    	System.out.print("Hii");
+    }
+    public static void main(String[] args)
+    {
+        QueSubClass sam = new QueSubClass();
+      
+        sam.methodOfX();
+        System.out.println(sam.i);
+
+    }
+}
+
+output: Hii143
+
+11. What will be the outcome of the below program?
+Ans : 104
+
+package pack1;
+ 
+public class A
+{
+    private int methodOne(int i)
+    {
+        return ++i;
+    }
+     
+    public int methodTwo(int i)
+    {
+        return methodOne(++i);
+    }
+}
+ 
+package pack2;
+ 
+import pack1.A;
+ 
+class B extends A
+{
+    int methodOne(int i)
+    {
+        return methodTwo(++i);
+    }
+}
+ 
+public class MainClass
+{
+    public static void main(String[] args)
+    {
+        System.out.println(new B().methodOne(101));
+    }
+}
+
+12. Can you find out the error in the following code snippet?
+Ans : We cannot reduce the visibility while overriding a method. From the below code, the visibility of methodOfA() in class A is public but it is reduced to default while overriding in the class B. So it will give error.
+
+class A
+{
+    public void methodOfA()
+    {
+        System.out.println("Class A");
+    }
+}
+ 
+class B extends A
+{
+    @Override
+    void methodOfA()
+    {
+        System.out.println("Class B");
+    }
+}
+
+13. private method can be overridden as public method. True or False?
+Ans : False, private methods cannot be overridden.
+
+14. A method of super class with default access modifier can be overridden as protected or public but not as private. True or false?
+Ans : True, the method of super class with default access modifier can be overridden as protected or public but not as private.
+
+15. Write the code on below scenario :
+
+Create an Employee Object which has the below members :
+
+1. name : public member.
+2. address : public member.
+3. salary : private member
+4. id : public member
+
+you need to create three employee such as : CEO,Project Manager and Team Lead who will inherit all those properties.
+You need to create one more super user HR who has access over the system and can see all the details of all employees. This class will contain one method calculatesalary which will give 
+the salary of the employee as : employee's salary * hike (consider hike =10%).
+
+Data Sample :
+
+CEO : name : "Rajesh Kumar ", address : "SaltLake,Kolkata", salary : 70000, id :1, calculatedsalary : 70000*10%
